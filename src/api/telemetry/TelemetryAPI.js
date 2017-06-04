@@ -23,13 +23,11 @@
 define([
     './TelemetryMetadataManager',
     './TelemetryValueFormatter',
-    'lodash',
-    'EventEmitter'
+    'lodash'
 ], function (
     TelemetryMetadataManager,
     TelemetryValueFormatter,
-    _,
-    EventEmitter
+    _
 ) {
     /**
      * A LimitEvaluator may be used to detect when telemetry values
@@ -175,7 +173,7 @@ define([
     /**
      * @private
      */
-    TelemetryAPI.prototype.findSubscriptionProvider = function (domainObject) {
+    TelemetryAPI.prototype.findSubscriptionProvider = function () {
         var args = Array.prototype.slice.apply(arguments);
         function supportsDomainObject(provider) {
             return provider.supportsSubscribe.apply(provider, args);
@@ -187,13 +185,28 @@ define([
     /**
      * @private
      */
-    TelemetryAPI.prototype.findRequestProvider = function (domainObject, options) {
+    TelemetryAPI.prototype.findRequestProvider = function (domainObject) {
         var args = Array.prototype.slice.apply(arguments);
         function supportsDomainObject(provider) {
             return provider.supportsRequest.apply(provider, args);
         }
 
         return this.requestProviders.filter(supportsDomainObject)[0];
+    };
+
+    /**
+     * @private
+     */
+    TelemetryAPI.prototype.standardizeRequestOptions = function (options) {
+        if (!options.hasOwnProperty('start')) {
+            options.start = this.MCT.time.bounds().start;
+        }
+        if (!options.hasOwnProperty('end')) {
+            options.end = this.MCT.time.bounds().end;
+        }
+        if (!options.hasOwnProperty('domain')) {
+            options.domain = this.MCT.time.timeSystem().key;
+        }
     };
 
     /**
@@ -211,7 +224,7 @@ define([
      * @returns {Promise.<object[]>} a promise for an array of
      *          telemetry data
      */
-    TelemetryAPI.prototype.request = function (domainObject, options) {
+    TelemetryAPI.prototype.request = function (domainObject) {
         var provider = this.findRequestProvider.apply(this, arguments);
         return provider.request.apply(provider, arguments);
     };
@@ -232,7 +245,7 @@ define([
      * @returns {Function} a function which may be called to terminate
      *          the subscription
      */
-    TelemetryAPI.prototype.subscribe = function (domainObject, callback, options) {
+    TelemetryAPI.prototype.subscribe = function (domainObject, callback) {
         var provider = this.findSubscriptionProvider.apply(this, arguments);
         return provider.subscribe.apply(provider, arguments);
     };

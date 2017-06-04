@@ -21,11 +21,9 @@
  *****************************************************************************/
 
 define([
-    'lodash',
-    '../objects/object-utils'
+    'lodash'
 ], function (
-    _,
-    objectUtils
+    _
 ) {
 
     /**
