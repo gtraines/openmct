@@ -13,7 +13,7 @@ define([
         "extensions":
         {
             "types": [
-                { "key": "styleguide.intro", "name": "Introduction", "cssClass": "icon-page", "description": "Introduction and overview to the style guide" },
+                { "key": "styleguide.intro", "name": "Introduction", "cssClass": "icon-fa-arrow-up", "description": "Introduction and overview to the style guide" },
                 { "key": "styleguide.standards", "name": "Standards", "cssClass": "icon-page", "description": "" },
                 { "key": "styleguide.colors", "name": "Colors", "cssClass": "icon-page", "description": "" },
                 { "key": "styleguide.glyphs", "name": "Glyphs", "cssClass": "icon-page", "description": "Glyphs overview" },

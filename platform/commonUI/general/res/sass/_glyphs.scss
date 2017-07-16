@@ -11,6 +11,12 @@
         font-family: $family;
     }
 }
+//
+//@font-face {
+//    font-family: 'FontAwesome';
+//    src: url('../fonts/font-awesome/fonts/fontawesome-webfont.woff') format('woff'),
+//        url('../fonts/font-awesome/fonts/fontawesome-webfont.ttf') format('truetype');
+//}
 
 /************************** CHAR UNICODES */
 
@@ -221,6 +227,7 @@ $glyph-icon-box-with-dashed-lines: '\e1129';
 .icon-timer {  @include glyphBefore($glyph-icon-timer); }
 .icon-topic {  @include glyphBefore($glyph-icon-topic); }
 .icon-box-with-dashed-lines {  @include glyphBefore($glyph-icon-box-with-dashed-lines); }
+.icon-fa-arrow-up { @include glyphBefore('\f01b', 'FontAwesome'); }
 
 /************************** 12 PX CLASSES */
 
